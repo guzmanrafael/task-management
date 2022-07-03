@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Task } from '../models/Task';
+import { User } from '../models/User';
 
 export default new DataSource({
   type: 'postgres',
@@ -10,7 +11,7 @@ export default new DataSource({
   database: process.env.DATABASE,
   synchronize: true,
   logging: false,
-  entities: [Task],
+  entities: [Task, User],
   subscribers: [],
   migrations: []
 });
