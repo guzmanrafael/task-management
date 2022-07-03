@@ -1,8 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn
-} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Task {
@@ -15,18 +11,18 @@ export class Task {
   @Column()
   description!: string;
 
-  @Column("boolean", { default: false })
+  @Column('boolean', { default: false })
   status!: boolean;
 
   @Column({ type: 'timestamptz' })
   deadline!: Date;
 
-  @Column("text", { array: true, default: [] })
+  @Column('text', { array: true, default: [] })
   comments!: string[];
 
-  @Column({default: ""})
+  @Column({ default: '' })
   responsible!: string;
 
-  @Column("text", { array: true, default: [] })
+  @Column('text', { array: true, default: [] })
   tags?: string[];
 }

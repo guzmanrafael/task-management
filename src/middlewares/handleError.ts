@@ -19,9 +19,7 @@ function handleError(
   let customError = err;
 
   if (!(err instanceof CustomError)) {
-    customError = new CustomError(
-      'We are having unexpected problems'
-    );
+    customError = new CustomError('We are having unexpected problems');
   }
 
   // we are not using the next function to prvent from triggering
@@ -29,6 +27,6 @@ function handleError(
   // response to client to prevent memory leaks in case you decide to
   // NOT use, like in this example, the NextFunction .i.e., next(new Error())
   res.status((customError as CustomError).status).send(customError);
-};
+}
 
 export default handleError;
