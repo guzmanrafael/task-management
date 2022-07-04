@@ -5,5 +5,6 @@ export interface ITaskController {
     getAll(req: Request, res: Response, next: NextFunction): Promise<any>;
     getById(req: Request, res: Response, next: NextFunction): Promise<any>;
     update(req: Request, res: Response, next: NextFunction): Promise<any>;
+    remove(req: Request, res: Response, next: NextFunction): Promise<any>;
   }
   

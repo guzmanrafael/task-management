@@ -9,4 +9,6 @@ export interface ITaskRepository {
   get(id: number, userId: number): Promise<Task>;
 
   update(id: number, data: Task, userId: number): Promise<Task>;
+
+  remove(id: number, userId: number): Promise<boolean>;
 }

@@ -97,4 +97,16 @@ export default class TaskRepository implements ITaskRepository {
       );
     }
   }
+
+  async remove(id: number, userId: number): Promise<boolean> {
+    try {
+      const repository = database.getRepository(Task);
+      const task = await this.get(id, userId);
+      if (!task) return false;
+      await repository.delete(id);
+      return true;
+    } catch (error) {
+      throw new CustomError('Problems with in the repository layer, review the remove method', 500, error);
+    }
+  }
 }

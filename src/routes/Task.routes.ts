@@ -20,5 +20,8 @@ router.get('/tasks/:taskId', [verifyToken], (req, res, next) =>
 router.put('/tasks/:taskId', [verifyToken], (req, res, next) =>
   taskController.update(req, res, next)
 );
+router.delete('/tasks/:taskId', [verifyToken], (req, res, next) =>
+  taskController.remove(req, res, next)
+);
 
 export = router;
