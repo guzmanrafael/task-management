@@ -31,14 +31,11 @@ export default class AuthService implements IAuthService {
 
   async signIn(data: User): Promise<any> {
     const userExist = await this.authRepository.get(data.email);
-    console.log(userExist);
     if (!userExist) {
       throw new CustomError('User does not exist', 409, '');
     }
 
-    console.log(data);
     const validPassword = compareSync(data.password, userExist.password);
-    console.log(validPassword);
     if (!validPassword) {
       throw new CustomError('Invalid password', 403, '');
     }
@@ -49,7 +46,6 @@ export default class AuthService implements IAuthService {
     };
 
     const token = generateToken(userToEncode);
-    console.log(token);
     return { token, user: userToEncode };
   }
 }
