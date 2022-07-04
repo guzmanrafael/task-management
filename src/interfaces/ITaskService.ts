@@ -8,4 +8,6 @@ export interface ITaskService {
   getTaskById(id: number, email: string): Promise<any>;
 
   updateTask(id: number, data: Task, email: string): Promise<any>;
+
+  deleteTask(id: number, email: string): Promise<any>;
 }
