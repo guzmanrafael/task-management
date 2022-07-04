@@ -41,7 +41,7 @@ export default class AuthService implements IAuthService {
     }
 
     const userToEncode = {
-      username: userExist.email,
+      email: userExist.email,
       id: userExist.id
     };
 
