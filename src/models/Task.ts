@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { User } from './User';
 
 @Entity()
 export class Task {
@@ -25,4 +26,7 @@ export class Task {
 
   @Column('text', { array: true, default: [] })
   tags?: string[];
+
+  @ManyToOne(() => User, (user) => user.tasks)
+  user: User
 }
