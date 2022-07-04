@@ -7,4 +7,6 @@ export interface ITaskRepository {
   getAll(userId: number): Promise<Task[]>;
 
   get(id: number, userId: number): Promise<Task>;
+
+  update(id: number, data: Task, userId: number): Promise<Task>;
 }

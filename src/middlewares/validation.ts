@@ -29,3 +29,16 @@ export const taskValidation = (data: User) => {
   });
   return taskSchema.validate(data);
 };
+
+export const taskUpdateValidation = (data: User) => {
+  const taskSchema = Joi.object({
+    title: Joi.string(),
+    description: Joi.string(),
+    status: Joi.boolean(),
+    deadline: Joi.string(),
+    comments: Joi.array().items(Joi.string()),
+    responsible: Joi.string().empty(),
+    tags: Joi.array().items(Joi.string())
+  });
+  return taskSchema.validate(data);
+};
