@@ -33,4 +33,16 @@ export default class TaskService implements ITaskService {
     }
     return await this.taskRepository.getAll(userExist.id);
   }
+
+  async getTaskById(id: number, email: string): Promise<any> {
+    const userExist: User = await this.authRepository.get(email);
+    if (!userExist) {
+      throw new CustomError('User does not exist', 409, '');
+    }
+    const task = await this.taskRepository.get(id, userExist.id);
+    if (!task) {
+      throw new CustomError('Task does not exist', 409, '');
+    }
+    return task;
+  }
 }

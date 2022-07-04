@@ -34,4 +34,19 @@ export default class TaskController implements ITaskController {
       next(error);
     }
   }
+
+  async getById(
+    req: any,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const { taskId } = req.params;
+      const { user } = req;
+      const task = await this.taskService.getTaskById(parseInt(taskId), user.email);
+      res.status(200).json(task);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

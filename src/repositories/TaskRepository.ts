@@ -46,4 +46,33 @@ export default class TaskRepository implements ITaskRepository {
       );
     }
   }
+
+  async get(id: number, userId: number): Promise<Task> {
+    try {
+      const repository = database.getRepository(Task);
+      const task = await repository
+        .createQueryBuilder('task')
+        .leftJoinAndSelect('task.user', 'user')
+        .where('user.id = :userId', { userId: userId })
+        .andWhere({ id: id })
+        .select([
+          'task.id',
+          'task.title',
+          'task.description',
+          'task.status',
+          'task.deadline',
+          'task.comments',
+          'task.responsible',
+          'task.tags'
+        ])
+        .getOne();
+      return task;
+    } catch (error) {
+      throw new CustomError(
+        'Problems with in the repository layer, review the get method',
+        500,
+        error
+      );
+    }
+  }
 }
