@@ -4,6 +4,7 @@ import express from 'express';
 import database from './config/database';
 import handleError from './middlewares/handleError';
 import AuthRoutes from './routes/Auth.routes';
+import TaskRoutes from './routes/Task.routes';
 
 const app = express();
 const apiRoutes = express.Router();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 apiRoutes.use("/auth", AuthRoutes);
+apiRoutes.use("", TaskRoutes);
 
 database
   .initialize()
