@@ -1,8 +1,8 @@
 import { compareSync, genSaltSync, hashSync } from 'bcryptjs';
 import { injectable } from 'tsyringe';
+import { INVALID_PASSWORD, USER_ALREADY_EXISTS, USER_DOES_NOT_EXIST } from '../commons/errors';
 import { generateToken } from '../config/jwt';
 import { IAuthService } from '../interfaces/IAuthService';
-import { CustomError } from '../models/CustomError';
 import { User } from '../models/User';
 import AuthRepository from '../repositories/AuthRepository';
 
@@ -17,9 +17,7 @@ export default class AuthService implements IAuthService {
   async signUp(data: User): Promise<any> {
     const userExist = await this.authRepository.get(data.email);
 
-    if (userExist) {
-      throw new CustomError('User already exists', 409, '');
-    }
+    if (userExist) USER_ALREADY_EXISTS();
 
     const hashPassword = hashSync(data.password, genSaltSync(10));
 
@@ -31,14 +29,10 @@ export default class AuthService implements IAuthService {
 
   async signIn(data: User): Promise<any> {
     const userExist = await this.authRepository.get(data.email);
-    if (!userExist) {
-      throw new CustomError('User does not exist', 409, '');
-    }
+    if (!userExist) USER_DOES_NOT_EXIST();
 
     const validPassword = compareSync(data.password, userExist.password);
-    if (!validPassword) {
-      throw new CustomError('Invalid password', 403, '');
-    }
+    if (!validPassword) INVALID_PASSWORD();
 
     const userToEncode = {
       email: userExist.email,
@@ -49,4 +43,3 @@ export default class AuthService implements IAuthService {
     return { token, user: userToEncode };
   }
 }
-

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { autoInjectable } from "tsyringe";
+import { BODY_ERROR } from "../commons/errors";
 import { IAuthController } from "../interfaces/IAuthController";
 import { signinValidation, signupValidation } from "../middlewares/validation";
 import { CustomError } from "../models/CustomError";
@@ -17,7 +18,8 @@ export default class AuthController implements IAuthController {
     try {
       const { body } = req;
       const { error } = signupValidation(body);
-      if (error) throw new CustomError(error.message, 400, error.name);
+      if (error) BODY_ERROR(error.message, 400, error.name);
+      
       const createdUser = await this.authService.signUp(body);
       res.status(200).json(createdUser);
     } catch (error) {
@@ -29,7 +31,7 @@ export default class AuthController implements IAuthController {
     try {
       const { body } = req;
       const { error } = signinValidation(body);
-      if (error) throw new CustomError(error.message, 400, error.name);
+      if (error) BODY_ERROR(error.message, 400, error.name);
       const creds = await this.authService.signIn(body);
       res.status(200).json(creds);
     } catch (error) {

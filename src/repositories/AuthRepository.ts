@@ -11,7 +11,8 @@ export default class AuthRepository implements IAuthRepository {
       await repository.save(user);
       return user;
     } catch (error) {
-      throw new CustomError('Problems with in the Auth repository layer, review the create method', 500, error);
+      console.error(error);
+      throw new CustomError('Problems with in the Auth repository layer, review the create method', 500, '');
     }
   }
 
@@ -22,7 +23,7 @@ export default class AuthRepository implements IAuthRepository {
       return user;
     } catch (error) {
       console.error(error);
-      throw new CustomError('Problems with in the Auth repository layer, review the get method', 500, error);
+      throw new CustomError('Problems with in the Auth repository layer, review the get method', 500, '');
     }
   }
 }

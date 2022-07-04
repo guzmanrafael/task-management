@@ -12,10 +12,11 @@ export default class TaskRepository implements ITaskRepository {
       taskCreated.user = user;
       return await repository.save(taskCreated);
     } catch (error) {
+      console.error(error);
       throw new CustomError(
         'Problems with in the Task repository layer, review the create method',
         500,
-        error
+        ''
       );
     }
   }
@@ -39,10 +40,11 @@ export default class TaskRepository implements ITaskRepository {
 
       return tasks;
     } catch (error) {
+      console.error(error);
       throw new CustomError(
         'Problems with in the Task repository layer, review the getAll method',
         500,
-        error
+        ''
       );
     }
   }
@@ -68,10 +70,11 @@ export default class TaskRepository implements ITaskRepository {
         .getOne();
       return task;
     } catch (error) {
+      console.error(error);
       throw new CustomError(
         'Problems with in the Task repository layer, review the get method',
         500,
-        error
+        ''
       );
     }
   }
@@ -90,10 +93,11 @@ export default class TaskRepository implements ITaskRepository {
 
       return this.get(id, userId);
     } catch (error) {
+      console.error(error);
       throw new CustomError(
         'Problems with in the Task repository layer, review the update method',
         500,
-        error
+        ''
       );
     }
   }
@@ -106,7 +110,8 @@ export default class TaskRepository implements ITaskRepository {
       await repository.delete(id);
       return true;
     } catch (error) {
-      throw new CustomError('Problems with in the repository layer, review the remove method', 500, error);
+      console.error(error);
+      throw new CustomError('Problems with in the repository layer, review the remove method', 500, '');
     }
   }
 }
