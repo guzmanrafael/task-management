@@ -3,4 +3,6 @@ import { User } from '../models/User';
 
 export interface ITaskRepository {
   create(task: Task, user: User): Promise<Task>;
+
+  getAll(userId: number): Promise<Task[]>;
 }
