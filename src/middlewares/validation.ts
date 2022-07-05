@@ -22,7 +22,7 @@ export const taskValidation = (data: User) => {
     title: Joi.string().required(),
     description: Joi.string().required(),
     status: Joi.boolean().required(),
-    deadline: Joi.string().required(),
+    deadline: Joi.date().required(),
     comments: Joi.array().items(Joi.string()),
     responsible: Joi.string().empty(),
     tags: Joi.array().items(Joi.string())
@@ -35,7 +35,7 @@ export const taskUpdateValidation = (data: User) => {
     title: Joi.string(),
     description: Joi.string(),
     status: Joi.boolean(),
-    deadline: Joi.string(),
+    deadline: Joi.date(),
     comments: Joi.array().items(Joi.string()),
     responsible: Joi.string().empty(),
     tags: Joi.array().items(Joi.string())

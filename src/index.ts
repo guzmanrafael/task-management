@@ -8,6 +8,8 @@ import TaskRoutes from './routes/Task.routes';
 import helmet from 'helmet';
 import compression from 'compression';
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import swaggerSetup from "./docs/swagger";
 
 const app = express();
 const apiRoutes = express.Router();
@@ -30,6 +32,7 @@ database
   .catch(console.error);
 
 app.use('/api', apiRoutes);
+app.use("/documentation",swaggerUi.serve, swaggerUi.setup(swaggerSetup));
 
 app.use(handleError);
 
