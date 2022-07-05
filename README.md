@@ -8,10 +8,14 @@ Clone this repository and install dependencies
 
 ### Add the .env with the following configuration
 >DBHOST = "localhost"
-DBUSERNAME = "postgres"
-DBPASSWORD = "password"
-DATABASE = "todo"
-TOKEN_SECRET = "whatevertoken"
+
+>DBUSERNAME = "postgres"
+
+>DBPASSWORD = "password"
+
+>DATABASE = "todo"
+
+>TOKEN_SECRET = "whatevertoken"
 
 ### Run development
 > npm run start
