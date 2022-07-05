@@ -5,12 +5,21 @@ import database from './config/database';
 import handleError from './middlewares/handleError';
 import AuthRoutes from './routes/Auth.routes';
 import TaskRoutes from './routes/Task.routes';
+import helmet from 'helmet';
+import compression from 'compression';
+import cors from "cors";
 
 const app = express();
 const apiRoutes = express.Router();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app
+.use(express.urlencoded({ extended: true }))
+.use(express.json())
+.use(cors())
+.use(helmet())
+.use(compression());
+
+apiRoutes.options("*", cors());
 
 apiRoutes.use("/auth", AuthRoutes);
 apiRoutes.use("", TaskRoutes);
